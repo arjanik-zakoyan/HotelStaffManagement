@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Սխալ";
+}
+
+<div class="container mt-5 text-center">
+    <h2 class="text-danger mb-3">⚠️ Տեղի է ունեցել սխալ</h2>
+    <p class="lead">@ViewBag.ErrorMessage</p>
+
+    @if (ViewBag.ExceptionMessage != null)
+    {
+        <div class="alert alert-warning mt-4 text-start mx-auto" style="max-width: 700px;">
+            <h5 class="text-dark">📌 Տվյալներ սխալի մասին</h5>
+            <hr />
+            <p><strong>Սխալի նկարագրություն:</strong> @ViewBag.ExceptionMessage</p>
+            <p><strong>Ճանապարհ:</strong> <code>@ViewBag.ExceptionPath</code></p>
+
+            @if (ViewBag.StackTrace != null)
+            {
+                <details>
+                    <summary class="mt-2" style="cursor: pointer;">Տեսնել մանրամասները (Stack Trace)</summary>
+                    <pre class="bg-light border p-2 mt-2" style="white-space: pre-wrap; font-size: 0.9rem;">@ViewBag.StackTrace</pre>
+                </details>
+            }
+        </div>
+    }
+
+    <a href="~/Account/Login" class="btn mt-4 px-4 py-2" style="background-color:#3F51B5; color: white;">
+        Վերադառնալ
+    </a>
+</div>
+

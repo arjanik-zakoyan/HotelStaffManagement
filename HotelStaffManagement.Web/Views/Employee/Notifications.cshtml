@@ -1,0 +1,60 @@
+﻿@model List<HotelStaffManagement.DataAccess.Models.Notification>
+
+@{
+    ViewData["Title"] = "Ծանուցումներ";
+    var unreadCount = Model.Count(n => !n.IsRead);
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/employee.css" />
+}
+
+<div class="container py-4 notifications-page">
+    <h2 class="mb-4">Ծանուցումներ</h2>
+    <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+            <div class="card-header-controls">
+                <span><strong>@unreadCount</strong> - Չնթերցված ծանուցում</span>
+                <form method="post" asp-action="MarkAllAsRead">
+                    <button type="submit" class="nav-link btn btn-link p-0 text-white">
+                        Նշել բոլորը որպես կարդացած
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div class="card-body">
+            @if (!Model.Any())
+            {
+                <div class="alert alert-info">Դուք չունեք ակտիվ ծանուցումներ։</div>
+            }
+            else
+            {
+                foreach (var n in Model.OrderByDescending(n => n.CreatedAt))
+                {
+                    <div class="notification-card position-relative@(n.IsRead ? "" : " unread")">
+                        <form method="post" asp-action="DeleteNotification" asp-route-id="@n.NotificationID" class="position-absolute top-0 end-0 m-2">
+                            <button type="submit" class="btn btn-sm btn-close text-danger" aria-label="Ջնջել"></button>
+                        </form>
+                        <div class="notification-text">
+                            <div class="notification-title">@n.Title</div>
+                            <div class="notification-message">@n.Message</div>
+                            <div class="notification-date">@n.CreatedAt.ToString("dd MMMM yyyy HH:mm", new System.Globalization.CultureInfo("hy-AM"))</div>
+                        </div>
+                        <div class="notification-actions mt-3">
+                            <form method="post" asp-action="MarkAsRead" asp-route-id="@n.NotificationID">
+                                <button type="submit" class="btn btn-sm ">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/employee.js"></script>
+    <partial name="_ValidationScriptsPartial" />
+}

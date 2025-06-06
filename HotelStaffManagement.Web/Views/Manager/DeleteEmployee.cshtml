@@ -1,0 +1,24 @@
+﻿@model HotelStaffManagement.Web.Models.Manager.DeleteEmployeeViewModel
+
+@{
+    ViewData["Title"] = "Հեռացնել Աշխատակցին";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/manager.css" />
+}
+
+<div class="delete-confirm-form bg-white p-4 shadow-sm rounded mx-auto mt-5" style="max-width: 500px;">
+    <h2 class="text-danger text-center mb-4">Հեռացնել Աշխատակցին</h2>
+
+    <p class="text-center">Դուք վստահ եք, որ ցանկանում եք հեռացնել <strong>@Model.FullName</strong>-ին համակարգից?</p>
+
+    <form asp-action="DeleteEmployeeConfirmed" method="post">
+        <input type="hidden" asp-for="UserID" />
+
+        <div class="d-flex justify-content-center mt-4 gap-3">
+            <button type="submit" class="btn btn-danger">Այո, Հեռացնել</button>
+            <a asp-action="EmployeeDetails" asp-route-id="@Model.UserID" class="btn btn-secondary">Ոչ, Վերադառնալ</a>
+        </div>
+    </form>
+</div>

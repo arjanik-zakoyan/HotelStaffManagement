@@ -1,0 +1,55 @@
+﻿@model List<HotelStaffManagement.Web.Models.Admin.UserViewModel>
+@{
+    ViewData["Title"] = "Օգտատերերի Կառավարում";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/admin.css" />
+}
+
+<div class="admin-page container mt-4">
+    <div class="admin-header d-flex justify-content-between align-items-center mb-3 flex-wrap">
+        <h2 class="page-title mb-4 mb-md-0">Բոլոր Օգտատերերը</h2>
+        <a class="btn btn-add-manager" asp-action="CreateManager">
+            <i class="fa fa-user-plus" style="margin-right: 6px;"></i>
+            Ավելացնել մենեջեր
+        </a>
+    </div>
+
+    <div class="mb-3">
+        <input type="text" id="managerSearch" class="form-control" placeholder="Որոնել օգտատիրոջը անունով կամ մուտքանունով..." />
+    </div>
+
+    <div class="table-responsive">
+        <table id="managerTable" class="table-managers table-bordered">
+            <thead class="table-header">
+                <tr>
+                    <th>Անուն Ազգանուն</th>
+                    <th>Մուտքանուն</th>
+                    <th>Դերը</th>
+                    <th class="text-center">Գործողություններ</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var manager in Model)
+                {
+                    <tr>
+                        <td>@manager.FullName</td>
+                        <td>@manager.Username</td>
+                        <td>@manager.Role</td>
+                        <td class="manager-actions text-center">
+                            <a class="btn btn-sm btn-edit" asp-action="EditUser" asp-route-id="@manager.UserID">Փոփոխել Անձնական Տվյալները</a>
+                            <a class="btn btn-sm btn-password" asp-action="ChangePassword" asp-route-id="@manager.UserID">Փոփոխել Ծածկագիր</a>
+                            <a class="btn btn-sm btn-delete" asp-action="DeleteUser" asp-route-id="@manager.UserID"> Հեռացնել</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/admin.js"></script>
+}
+

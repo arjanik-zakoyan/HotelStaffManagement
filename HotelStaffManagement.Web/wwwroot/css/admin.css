@@ -1,0 +1,341 @@
+﻿/* ======================== */
+/* Index */
+/* ======================== */
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    margin-bottom: 20px;
+}
+
+    .admin-header h2 {
+        color: #3F51B5;
+        font-weight: 700;
+    }
+
+.btn-add-manager {
+    background-color: #28a745;
+    border: none;
+    color: white;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 6px;
+    transition: 0.3s;
+}
+
+    .btn-add-manager:hover {
+        background-color: #218838;
+        color: white;
+    }
+
+.search-bar {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: end;
+}
+
+    .search-bar input[type="text"] {
+        padding: 8px 12px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+        width: 250px;
+    }
+
+.table-managers {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    overflow: hidden;
+}
+
+    .table-managers thead {
+        background-color: #3F51B5;
+        color: white;
+    }
+        .table-managers thead tr:hover {
+            background-color: #3F51B5;
+            color: white;
+        }
+
+    .table-managers th,
+    .table-managers td {
+        padding: 12px 15px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .table-managers tr:hover {
+        background-color: #f1f1f1;
+    }
+
+.manager-actions button,
+.manager-actions a {
+    margin-right: 6px;
+    padding: 6px 12px;
+    font-size: 14px;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-edit {
+    background-color: #009688;
+    color: white;
+    font-weight: 600;
+}
+
+    .btn-edit:hover {
+        background-color: #00796B;
+        color: white;
+    }
+.btn-password {
+    background-color: #673AB7;
+    color: white;
+    font-weight: 600;
+}
+
+    .btn-password:hover {
+        background-color: #5E35B1;
+        color: white;
+    }
+
+.btn-delete {
+    background-color: #d9534f;
+    color: white;
+    font-weight: 600;
+}
+
+    .btn-delete:hover {
+        background-color: #c9302c;
+        color: white;
+    }
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+.table-managers {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 600px;
+}
+
+    .table-managers th, .table-managers td {
+        padding: 12px;
+        text-align: left;
+        vertical-align: middle;
+        border: 1px solid #ddd;
+        white-space: nowrap;
+    }
+
+.manager-actions .btn {
+    font-size: 14px;
+    padding: 5px 10px;
+    margin: 3px 3px;
+    white-space: nowrap;
+}
+
+/* ======================== */
+/* Create New Manager*/
+/* ======================== */
+
+.create-manager-form {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    max-width: 600px;
+    margin: 0 auto;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+    .create-manager-form h2 {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+        text-align: center;
+    }
+
+    .create-manager-form label {
+        color: #212121; 
+        font-weight: 600;
+    }
+
+    .create-manager-form .form-control {
+        border: 1px solid #ccc;
+        border-radius: 0.5rem;
+        padding: 0.75rem;
+        font-size: 1rem;
+    }
+
+.create-manager-form .btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+    color: white;
+    border: none;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+    .create-manager-form .btn-success:hover {
+        background-color: #218838;
+        border-color: #1e7e34;
+    }
+
+    .create-manager-form .btn-secondary {
+        background-color: #6c757d;
+        border-color: #6c757d;
+        color: white;
+        font-weight: 600;
+    }
+
+        .create-manager-form .btn-secondary:hover {
+            background-color: #5a6268;
+            border-color: #5a6268;
+            color: white;
+        }
+
+    .create-manager-form .text-danger {
+        font-size: 0.875rem;
+    }
+
+/* ======================== */
+/* Edit Manager */
+/* ======================== */
+
+.edit-manager-form {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    max-width: 600px;
+    margin: 2rem auto;
+}
+
+    .edit-manager-form h2 {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+        text-align: center;
+    }
+
+    .edit-manager-form label {
+        color: #212121;
+        font-weight: 600;
+    }
+
+    .edit-manager-form .form-control {
+        border: 1px solid #ccc;
+        border-radius: 0.5rem;
+        padding: 0.75rem;
+        font-size: 1rem;
+    }
+
+    .edit-manager-form .btn-success {
+        background-color: #009688;
+        border-color: #009688;
+        font-weight: 600;
+        transition: 0.3s;
+    }
+        .edit-manager-form .btn-success:hover {
+            background-color: #00796B;
+            border-color: #00796B;
+        }
+
+    .edit-manager-form .btn-secondary {
+        background-color: #6c757d;
+        border-color: #6c757d;
+        color: white;
+        font-weight: 600;
+    }
+
+        .edit-manager-form .btn-secondary:hover {
+            background-color: #5a6268;
+            border-color: #5a6268;
+            color: white;
+        }
+
+    .edit-manager-form .text-danger {
+        font-size: 0.875rem;
+    }
+
+/* ======================== */
+/* Change Password Page */
+/* ======================== */
+
+.change-password-form {
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+    max-width: 600px;
+    margin: 2rem auto;
+}
+
+    .change-password-form h2 {
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .change-password-form label {
+        color: #212121;
+        font-weight: 600;
+    }
+
+    .change-password-form .form-control {
+        border-radius: 0.5rem;
+        padding: 0.75rem;
+        font-size: 1rem;
+    }
+.btn-password {
+    background-color: #673AB7;
+    color: white;
+    font-weight: 600;
+}
+.change-password-form .btn-success {
+    background-color: #673AB7;
+    border-color: #673AB7;
+    font-weight: 600;
+    transition: 0.3s;
+}
+    .change-password-form .btn-success:hover {
+        background-color: #5E35B1;
+        border-color: #5E35B1;
+    }
+
+.change-password-form .btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    color: white;
+    font-weight: 600;
+}
+
+    .change-password-form .btn-secondary:hover {
+        background-color: #5a6268;
+        border-color: #5a6268;
+        color: white;
+    }
+
+/* Responsive design */
+
+@media (max-width: 768px) {
+    .admin-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .manager-actions {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .table-managers {
+        font-size: 14px;
+    }
+}

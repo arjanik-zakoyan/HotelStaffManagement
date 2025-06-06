@@ -1,0 +1,365 @@
+﻿/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* Firefox */
+    scrollbar-width: auto; 
+    scrollbar-color: #3F51B5 #f1f1f1;
+}
+
+/* Chrome, Edge, Safari */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #3F51B5;
+    border-radius: 0px !important;
+}
+
+::-webkit-scrollbar-button {
+    display: none !important;
+}
+html, body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #F5F5F5;
+    color: #212121;
+    height: auto;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+.page-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Navigation Bar */
+.navbar {
+    background-color: #3F51B5;
+    padding: 1rem 0;
+}
+
+    .navbar .navbar-brand {
+        color: white;
+        font-weight: bold;
+        font-size: 1.5rem;
+        text-decoration: none;
+    }
+
+.navbar-toggler {
+    border: none;
+    font-size: 1.5rem;
+    background: none;
+}
+
+    .navbar-toggler:focus {
+        outline: none;
+        box-shadow: none;
+    }
+
+.navbar-nav .nav-link,
+.logout-form .nav-link {
+    color: white !important;
+    font-size: 1.1rem;
+}
+
+    .navbar-nav .nav-link:hover,
+    .logout-form .nav-link:hover {
+        color: #FFC107 !important; 
+    }
+
+.logout-form {
+    margin: 0;
+    padding: 0;
+}
+
+/* Optional styling */
+.flatpickr-calendar {
+    font-family: 'Segoe UI', sans-serif;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+}
+
+.flatpickr-day.today {
+    background: #ffc107;
+    border-color: #ffc107;
+    color: white;
+    font-weight: bold;
+}
+
+.flatpickr-day.selected {
+    background-color: #3F51B5;
+    border-color: #3F51B5;
+    color: white;
+}
+
+.user-navbar {
+    background-color: #3F51B5;
+    padding: 10px;
+}
+
+    .user-navbar .nav-link {
+        color: white;
+        font-weight: 500;
+        padding: 10px 14px;
+        transition: background-color 0.2s ease-in-out;
+    }
+
+        .user-navbar .nav-link.active-link {
+            color: #FFC107 !important;
+            border-radius: 6px;
+        }
+
+        .user-navbar .nav-link:hover {
+            color: #FFC107 !important;
+            border-radius: 6px;
+        }
+
+.notification-badge {
+    position: absolute;
+    top: 2px;
+    right: 0;
+    background-color: #FFC107;
+    color: #F5F5F5;
+    border-radius: 50%;
+    font-size: 0.75rem;
+    font-weight: bold;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+}
+
+
+/* Main Content */
+
+.content-wrapper {
+    flex: 1;
+    padding: 2rem 1rem;
+}
+
+/* Chat toggle button */
+
+.chat-toggle-btn {
+    position: fixed !important;
+    bottom: 35px;
+    right: 50px;
+    background-color: #3F51B5;
+    color: white;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 22px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    cursor: pointer;
+    z-index: 1000;
+}
+
+#chatToggleBadge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: #FFC107;
+    color: white;
+    font-size: 0.75rem;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    z-index: 1001;
+}
+
+.chat-box {
+    position: fixed;
+    bottom: 85px;
+    right: 40px;
+    width: 310px;
+    height: 420px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-header {
+    display: flex;
+    background-color: #3F51B5;
+}
+
+    .chat-header .tab {
+        flex: 1;
+        border: none;
+        background: none;
+        color: white;
+        font-weight: 600;
+        padding: 10px;
+        cursor: pointer;
+    }
+
+        .chat-header .tab.active {
+            background-color: #5C6BC0;
+        }
+
+.chat-body {
+    padding: 10px;
+    overflow-y: auto;
+    height: 100%;
+}
+
+#chatSearch {
+    width: 100%;
+    padding: 6px 10px;
+    margin-bottom: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.user-entry {
+    padding: 8px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+    position: relative;
+}
+
+    .user-entry:hover {
+        background-color: #f3f3f3;
+    }
+
+    .user-entry small {
+        font-size: 0.8rem;
+        color: #666;
+    }
+
+.per-user-badge {
+    position: absolute;
+    top: 22px;
+    right: 10px;
+    background-color: #3F51B5;
+    color: #F5F5F5;
+    border-radius: 50%;
+    font-size: 0.75rem;
+    font-weight: bold;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+    line-height: 20px;
+}
+
+.chat-window {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #fff;
+    height: 100%;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-window-header {
+    background-color: #3F51B5;
+    color: white;
+}
+
+.chat-window-body {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    font-size: 0.9rem;
+    background-color: #FAFAFA;
+}
+
+.chat-window-footer {
+    border-top: 1px solid #ccc;
+    background: white;
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+}
+#errorContainer {
+    display: none;
+    color: red;
+    font-size: 12px
+}
+.btn-send-msg {
+    background-color: #3F51B5;
+    color: white;
+}
+
+    .btn-send-msg:hover {
+        background-color: #5C6BC0;
+    }
+
+.chat-window-footer input {
+    flex: 1;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    padding: 8px;
+}
+
+.message {
+    max-width: 85%;
+    font-size: 0.95rem;
+    color: #212121;
+    margin-bottom: 8px;
+    word-wrap: break-word;
+}
+
+    .message.mine {
+        text-align: right;
+        margin-left: auto;
+    }
+
+    .message.other {
+        text-align: left;
+        margin-right: auto;
+    }
+
+.message-meta {
+    font-size: 0.75rem;
+    color: #ccc;
+}
+
+.read-status {
+    font-size: 0.75rem;
+    color: #212121;
+    margin-left: 4px;
+}
+
+    .read-status.read {
+        color: #3F51B5;
+    }
+
+/* Footer */
+.footer {
+    background-color: #eaeaea;
+    padding: 1rem 0;
+    text-align: center;
+    font-size: 14px;
+    color: #212121;
+    border-top: 1px solid #ccc;
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+    .notification-badge {
+        left: 20px;
+    }
+}

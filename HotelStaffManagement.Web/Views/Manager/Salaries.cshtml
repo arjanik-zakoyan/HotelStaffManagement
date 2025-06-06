@@ -1,0 +1,69 @@
+﻿@model HotelStaffManagement.Web.Models.Manager.SalaryOverviewViewModel
+
+@{
+    ViewData["Title"] = "Աշխատավարձ";
+    var totalRegular = Model.Salaries.Sum(s => s.RegularHours);
+    var totalNight = Model.Salaries.Sum(s => s.NightHours);
+    var totalSalary = Model.Salaries.Sum(s => s.TotalSalaryAmount);
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/manager.css" />
+}
+
+<div class="container employee-salary-page py-4">
+    <h2 class="text-center mb-4">Աշխատավարձեր</h2>
+
+    <div class="salary-card">
+        <div class="salary-header-bar">
+            <div class="text-slary-month fs-5">
+                @Model.DisplayMonth
+            </div>
+            <div>
+                <form method="get" asp-action="Salaries" class="d-flex align-items-center">
+                    <input type="month" lang="hy" name="month" value="@Model.Month" class="form-control form-control-sm me-2" style="width: 120px" />
+                    <button type="submit" class="btn btn-salary-month">Ցուցադրել</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="salary-scroll-wrapper">
+            <table class="table table-bordered table-striped table-hover">
+                <thead>
+                    <tr>
+                        <th class="sticky-col">Անուն Ազգանուն</th>
+                        <th>Հաստիք</th>
+                        <th>Ցերեկային ժամեր</th>
+                        <th>Գիշերային ժամեր</th>
+                        <th>Ընդհանուր Աշխատավարձ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var s in Model.Salaries)
+                    {
+                        <tr>
+                            <td class="sticky-col">@s.FullName</td>
+                            <td>@HotelStaffManagement.Web.Helpers.PositionHelper.GetPositionDisplayName(s.Position)</td>
+                            <td>@s.RegularHours</td>
+                            <td>@s.NightHours</td>
+                            <td>@s.TotalSalaryAmount.ToString("N0") դրամ</td>
+                        </tr>
+                    }
+                    <tr class="fw-bold text-end table-secondary">
+                        <td colspan="2" class="text-start">Ընդամենը</td>
+                        <td>@totalRegular</td>
+                        <td>@totalNight</td>
+                        <td>@totalSalary.ToString("N0") դրամ</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            @if (!Model.Salaries.Any())
+            {
+                <div class="alert alert-info text-center">
+                    Տվյալ ամսվա համար աշխատավարձեր դեռ հաշվարկված չեն։
+                </div>
+            }
+        </div>
+    </div>
+</div>

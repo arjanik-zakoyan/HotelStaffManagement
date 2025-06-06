@@ -1,0 +1,103 @@
+﻿@model HotelStaffManagement.Web.Models.Manager.EmployeeListViewModel
+
+@{
+    ViewData["Title"] = "Աշխատակիցների Կառավարում";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/manager.css" />
+}
+
+<div class="container-fluid manager-page p-4">
+    <!-- Title and buttons -->
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-4 gap-3">
+        <h2 class="page-title">Աշխատակիցներ</h2>
+        <div class="d-flex gap-2 flex-wrap">
+            <a class="btn btn-add-employee" asp-action="CreateEmployee">
+                <i class="fa fa-user-plus"></i>
+                <span>Ավելացնել Աշխատակից</span>
+            </a>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Sidebar Filter -->
+        <div class="col-lg-3 mb-4">
+            <div class="sidebar bg-white p-3 rounded shadow-sm">
+                <h5 class="mb-3">Ֆիլտրել</h5>
+                <form method="get" asp-action="Index" class="d-flex flex-column gap-3">
+                    <input type="text"
+                           class="form-control"
+                           name="searchTerm"
+                           value="@Model.SearchTerm"
+                           placeholder="Որոնել անունով..." />
+
+                    <select class="form-select" name="position">
+                        <option value="">Բոլորը</option>
+                        <option value="Receptionist" selected="@(Model.Position == "Receptionist" ? "selected" : null)">Ընդունարանի աշխատակից</option>
+                        <option value="Housekeeper" selected="@(Model.Position == "Housekeeper" ? "selected" : null)">Սենյակավար</option>
+                        <option value="Chef" selected="@(Model.Position == "Chef" ? "selected" : null)">Խոհարար</option>
+                        <option value="Security" selected="@(Model.Position == "Security" ? "selected" : null)">Անվտանգություն աշխատակից</option>
+                        <option value="Waiter" selected="@(Model.Position == "Waiter" ? "selected" : null)">Մատուցող</option>
+                        <option value="Bartender" selected="@(Model.Position == "Bartender" ? "selected" : null)">Բարմեն</option>
+                        <option value="Technician" selected="@(Model.Position == "Technician" ? "selected" : null)">Տեխնիկ</option>
+                    </select>
+
+                    <button type="submit" class="btn btn-primary">Որոնել</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Employee Cards -->
+        <div class="col-lg-9">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 g-4" id="employeeList">
+                @if (Model.Employees.Any())
+                {
+                    @foreach (var emp in Model.Employees)
+                    {
+                        <div class="col employee-card-container">
+                            <a asp-controller="Manager" asp-action="EmployeeDetails" asp-route-id="@emp.UserID" class="text-decoration-none text-dark">
+                                <div class="employee-card p-3 shadow-sm rounded bg-white h-100">
+                                    <h5 class="mb-2">@emp.FullName</h5>
+                                    <div class="mb-1"><strong>Մուտքանուն:</strong> @emp.Username</div>
+                                    <div class="mb-1"><strong>Հաստիք:</strong> @emp.DisplayPosition</div>
+                                    <div><strong>Ժամավճար:</strong> @emp.SalaryPerHour Դր.</div>
+                                </div>
+                            </a>
+                        </div>
+                    }
+                }else
+                {
+                    <div class="alert alert-info text-left mt-4 w-100">
+                    <i class="fas fa-info-circle me-2"></i> Աշխատակից չի հայտնաբերվել։
+                </div>
+                }
+
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination-wrapper text-center mt-4">
+                <nav>
+                    <ul class="pagination justify-content-center">
+                        @for (int i = 1; i <= Model.TotalPages; i++)
+                        {
+                            <li class="page-item @(i == Model.CurrentPage ? "active" : null)">
+                                <a class="page-link"
+                                   asp-action="Index"
+                                   asp-route-page="@i"
+                                   asp-route-searchTerm="@Model.SearchTerm"
+                                   asp-route-position="@Model.Position">
+                                    @i
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/manager.js"></script>
+}

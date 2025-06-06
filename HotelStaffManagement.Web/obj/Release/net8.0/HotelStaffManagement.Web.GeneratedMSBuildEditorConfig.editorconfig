@@ -1,0 +1,103 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = HotelStaffManagement.Web
+build_property.RootNamespace = HotelStaffManagement.Web
+build_property.ProjectDir = C:\Users\Arjan\OneDrive\Рабочий стол\Դիպլոմ\HotelStaffManagement\HotelStaffManagement.Web\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\Arjan\OneDrive\Рабочий стол\Դիպլոմ\HotelStaffManagement\HotelStaffManagement.Web
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/Arjan/OneDrive/Рабочий стол/Դիպլոմ/HotelStaffManagement/HotelStaffManagement.Web/Views/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Arjan/OneDrive/Рабочий стол/Դիպլոմ/HotelStaffManagement/HotelStaffManagement.Web/Views/Admin/ChangePassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ2hhbmdlUGFzc3dvcmQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Arjan/OneDrive/Рабочий стол/Դիպլոմ/HotelStaffManagement/HotelStaffManagement.Web/Views/Admin/CreateManager.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cQ3JlYXRlTWFuYWdlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Arjan/OneDrive/Рабочий стол/Դիպլոմ/HotelStaffManagement/HotelStaffManagement.Web/Views/Admin/DeleteManager.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRGVsZXRlTWFuYWdlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Arjan/OneDrive/Рабочий стол/Դիպլոմ/HotelStaffManagement/HotelStaffManagement.Web/Views/Admin/EditManager.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cRWRpdE1hbmFnZXIuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Arjan/OneDrive/Рабочий стол/Դիպլոմ/HotelStaffManagement/HotelStaffManagement.Web/Views/Admin/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Arjan/OneDrive/Рабочий стол/Դիպլոմ/HotelStaffManagement/HotelStaffManagement.Web/Views/Error/ErrorPage.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRXJyb3JcRXJyb3JQYWdlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Arjan/OneDrive/Рабочий стол/Դիպլոմ/HotelStaffManagement/HotelStaffManagement.Web/Views/Manager/AllSchedules.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFuYWdlclxBbGxTY2hlZHVsZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Arjan/OneDrive/Рабочий стол/Դիպլոմ/HotelStaffManagement/HotelStaffManagement.Web/Views/Manager/ChangePassword.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFuYWdlclxDaGFuZ2VQYXNzd29yZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Arjan/OneDrive/Рабочий стол/Դիպլոմ/HotelStaffManagement/HotelStaffManagement.Web/Views/Manager/CreateEmployee.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFuYWdlclxDcmVhdGVFbXBsb3llZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Arjan/OneDrive/Рабочий стол/Դիպլոմ/HotelStaffManagement/HotelStaffManagement.Web/Views/Manager/CreateSchedule.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFuYWdlclxDcmVhdGVTY2hlZHVsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Arjan/OneDrive/Рабочий стол/Դիպլոմ/HotelStaffManagement/HotelStaffManagement.Web/Views/Manager/DeleteEmployee.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFuYWdlclxEZWxldGVFbXBsb3llZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Arjan/OneDrive/Рабочий стол/Դիպլոմ/HotelStaffManagement/HotelStaffManagement.Web/Views/Manager/EditEmployee.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFuYWdlclxFZGl0RW1wbG95ZWUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Arjan/OneDrive/Рабочий стол/Դիպլոմ/HotelStaffManagement/HotelStaffManagement.Web/Views/Manager/EmployeeDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFuYWdlclxFbXBsb3llZURldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Arjan/OneDrive/Рабочий стол/Դիպլոմ/HotelStaffManagement/HotelStaffManagement.Web/Views/Manager/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTWFuYWdlclxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Arjan/OneDrive/Рабочий стол/Դիպլոմ/HotelStaffManagement/HotelStaffManagement.Web/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Arjan/OneDrive/Рабочий стол/Դիպլոմ/HotelStaffManagement/HotelStaffManagement.Web/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Arjan/OneDrive/Рабочий стол/Դիպլոմ/HotelStaffManagement/HotelStaffManagement.Web/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Arjan/OneDrive/Рабочий стол/Դիպլոմ/HotelStaffManagement/HotelStaffManagement.Web/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-wi5yuyvr7a

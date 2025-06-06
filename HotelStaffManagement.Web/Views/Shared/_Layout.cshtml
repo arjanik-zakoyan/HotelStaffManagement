@@ -1,0 +1,187 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject IHttpContextAccessor HttpContextAccessor
+
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Հյուրանոցի Անձնակազմի Կառավարում</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="~/images/Logo/favicon.png" />
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+    <!-- Flatpickr CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
+    <!-- Site-wide styles -->
+    <link rel="stylesheet" href="~/css/site.css" />
+    @RenderSection("Styles", required: false)
+</head>
+<body>
+    <div class="page-container">
+        <!-- Navigation bar -->
+        <nav class="navbar navbar-expand-lg user-navbar">
+            <div class="container-fluid">
+                @{
+                    string? role = User.IsInRole("Admin") ? "Admin"
+                    : User.IsInRole("Manager") ? "Manager"
+                    : User.IsInRole("Employee") ? "Employee"
+                    : null;
+
+                    string controller = role ?? "Account";
+                    string action = role != null ? "Index" : "Login";
+                }
+                <a asp-controller="@controller" asp-action="@action" class="navbar-brand">
+                    <img src="~/images/Logo/nav-logo.png" alt="Hotel Staff Management Logo" height="60" />
+                </a>
+
+                <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+                    ☰
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarContent">
+                    <ul class="navbar-nav align-items-left">
+                        @if (HttpContextAccessor.HttpContext?.User?.Identity?.IsAuthenticated == true)
+                        {
+                            var user = HttpContextAccessor.HttpContext.User;
+                            var fullName = ViewBag.FullName as string ?? "Օգտատեր";
+                            var currentAction = ViewContext.RouteData.Values["Action"]?.ToString();
+                            var currentController = ViewContext.RouteData.Values["Controller"]?.ToString();
+
+                            if (user.IsInRole("Employee"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link @(currentAction == "AllSchedules" && currentController == "Employee" ? "active-link" : "")" asp-controller="Employee" asp-action="AllSchedules">Հյուրանոցի Գրաֆիկը</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link @(currentAction == "Index" && currentController == "Employee" ? "active-link" : "")" asp-controller="Employee" asp-action="Index">@fullName</a>
+                                </li>
+                                <li class="nav-item position-relative">
+                                    <a class="nav-link @(currentAction == "Notifications" && currentController == "Employee" ? "active-link" : "")"
+                                       asp-controller="Employee" asp-action="Notifications">
+                                        <i class="fas fa-bell"></i>
+                                        @if (ViewBag.UnreadNotificationCount > 0)
+                                        {
+                                            <span class="notification-badge">@ViewBag.UnreadNotificationCount</span>
+                                        }
+                                    </a>
+                                </li>
+
+                            }
+                            else if (user.IsInRole("Manager"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link @(currentAction == "AllSchedules" && currentController == "Manager" ? "active-link" : "")" 
+                                        asp-controller="Manager" asp-action="AllSchedules">
+                                        Աշխատանքային Գրաֆիկ
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link @(currentAction == "Index" && currentController == "Manager" ? "active-link" : "")" 
+                                        asp-controller="Manager" asp-action="Index">
+                                        Աշխատակիցներ
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link @(currentAction == "Salaries" && currentController == "Manager" ? "active-link" : "")"
+                                       asp-controller="Manager" asp-action="Salaries">
+                                        Աշխատավարձ
+                                    </a>
+                                </li>
+
+                            }
+
+                            <li class="nav-item">
+                                <form asp-controller="Account" asp-action="Logout" method="post" class="logout-form">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="nav-link">Դուրս գալ</button>
+                                </form>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Account" asp-action="Login">Մուտք</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Main content -->
+        <main class="content-wrapper">
+            @RenderBody()
+        </main>
+        <!-- Chat floating button -->
+        @if (HttpContextAccessor.HttpContext?.User?.Identity?.IsAuthenticated == true)
+        {
+            var user = HttpContextAccessor.HttpContext.User;
+            if (user.IsInRole("Employee") || user.IsInRole("Manager"))
+            {
+                <button id="chatToggleBtn" class="chat-toggle-btn position-relative">
+                    <i class="fas fa-comment"></i>
+                    <span id="chatToggleBadge" class="d-none"></span>
+                </button>
+
+                <!--  Chat popup -->
+                <div id="chatBox" class="chat-box d-none">
+                    <!-- Header with Tabs -->
+                    <div class="chat-header">
+                        <button class="tab active" data-tab="managers">Մենեջերներ</button>
+                        <button class="tab" data-tab="employees">Աշխատակիցներ</button>
+                    </div>
+
+                    <!-- Search & Lists -->
+                    <div class="chat-body">
+                        <input type="text" id="chatSearch" class="form-control mb-2" placeholder="Որոնել...">
+
+                        <div class="tab-content" id="managersTab"></div>
+                        <div class="tab-content d-none" id="employeesTab"></div>
+                    </div>
+
+                    <!-- Message Window (Hidden by default) -->
+                    <div id="chatWindow" class="chat-window d-none">
+                        <div class="chat-window-header text-white d-flex justify-content-between align-items-center px-3 py-2">
+                            <div id="chatReceiverName" class="fw-semibold"></div>
+                            <button class="btn btn-sm text-white" id="backToListBtn">
+                                <i class="fas fa-arrow-left"></i>
+                            </button>
+                        </div>
+                        <div class="chat-window-body" id="chatMessages">
+                            <!-- Messages will go here -->
+                        </div>
+                        <div class="p-2 w-100">
+                            <div class="p-2" id="errorContainer"></div>
+                            <div class="chat-window-footer d-flex gap-2">
+                                <input type="text" id="messageInput" class="form-control" placeholder="Գրեք հաղորդագրությունը...">
+                                <button id="sendMessageBtn" class="btn text-white btn-send-msg">
+                                    <i class="fas fa-paper-plane"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container">
+                <span>&copy; @DateTime.Now.Year Hotel Staff Management</span>
+            </div>
+        </footer>
+    </div>
+    <!-- Scripts -->
+    <script src="~/js/site.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Flatpickr JS -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <!-- For Armenian Translate -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/hy.js"></script>
+    <!-- Chat -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+
+</html>

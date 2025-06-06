@@ -1,0 +1,131 @@
+﻿@model HotelStaffManagement.Web.Models.Employee.EmployeePersonalViewModel
+@using System.Globalization
+@using HotelStaffManagement.Web.Helpers
+
+
+@{
+    ViewData["Title"] = Model.FullName;
+
+    var month = Model.CurrentMonth;
+    var daysInMonth = DateTime.DaysInMonth(month.Year, month.Month);
+    var calendar = Model.CalendarDays.ToDictionary(d => d.Date.Date);
+
+    var prevMonth = month.AddMonths(-1).ToString("yyyy-MM-dd");
+    var nextMonth = month.AddMonths(1).ToString("yyyy-MM-dd");
+    
+    var today = DateTime.Today;
+
+    string[] armenianDays = new[] { "Երկ", "Երք", "Չրք", "Հնգ", "Ուր", "Շբթ", "Կիր" };
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/employee.css" />
+}
+
+<div class="container py-4">
+    <h4 class="mb-4">Անձնական Տվյալներ</h4>
+    <div class="card mb-4">
+        <div class="card-header bg-primary text-white">@Model.FullName</div>
+        <div class="card-body">
+            <p><strong>Մուտքանուն:</strong> @Model.Username</p>
+            @{
+                if (Model.PhoneNumber != null)
+                {
+                    <p>
+                        <strong>Հեռախոսահամար:</strong>
+                        @($"{Model.PhoneNumber.Substring(0, 3)} {Model.PhoneNumber.Substring(3, 3)} {Model.PhoneNumber.Substring(6)}")
+                    </p>
+                }
+            }
+            <p><strong>Հաստիք:</strong> @PositionHelper.GetPositionDisplayName(Model.Position)</p>
+            <p><strong>Ժամավճար:</strong> @Model.SalaryPerHour Դր.</p>
+        </div>
+    </div>
+    <h4 class="mb-4">Աշխատանքայնի Գրաֆիկ</h4>
+    <div class="calendar-card">
+        <div class="calendar-header-bar">
+            <form method="get" asp-action="Index">
+                <input type="hidden" name="month" value="@Model.CurrentMonth.AddMonths(-1).ToString("yyyy-MM-dd")" />
+                <button type="submit" class="calendar-nav-button">&#8592;</button>
+            </form>
+
+            <div class="calendar-month-label">
+                @Model.CurrentMonth.ToString("yyyyթ․ MMMM", new System.Globalization.CultureInfo("hy-AM"))
+            </div>
+
+            <form method="get" asp-action="Index">
+                <input type="hidden" name="month" value="@Model.CurrentMonth.AddMonths(1).ToString("yyyy-MM-dd")" />
+                <button type="submit" class="calendar-nav-button">&#8594;</button>
+            </form>
+        </div>
+
+        <div class="calendar-scroll-wrapper">
+            <table class="calendar-table">
+                <thead>
+                    <tr>
+                        @foreach (var day in armenianDays)
+                        {
+                            <th class="calendar-day-header">@day</th>
+                        }
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        var firstDay = new DateTime(month.Year, month.Month, 1);
+                        int startOffset = ((int)firstDay.DayOfWeek + 6) % 7;
+                        int printedDays = 0;
+
+                        while (printedDays < daysInMonth)
+                        {
+                            <tr>
+                                @for (int i = 0; i < 7; i++)
+                                {
+                                    if ((printedDays == 0 && i < startOffset) || printedDays >= daysInMonth)
+                                    {
+                                        <td class="calendar-cell empty"></td>
+                                    }
+                                    else
+                                    {
+                                        var date = new DateTime(month.Year, month.Month, printedDays + 1);
+                                        calendar.TryGetValue(date.Date, out var dayInfo);
+                                        var isToday = date.Date == today.Date;
+
+                                        <td class="calendar-cell @(dayInfo != null ? "has-schedule" : "") @(isToday ? "today-cell" : "")">
+                                            <div class="day-number">@date.Day</div>
+
+                                            @if (dayInfo != null)
+                                            {
+                                                <div class="shift-list">
+                                                    @foreach (var shift in dayInfo.ShiftTimes)
+                                                    {
+                                                        var (shiftStart, shiftEnd) = ScheduleHelper.ParseShiftTimes(date, shift);
+                                                        var now = DateTime.Now;
+                                                        var shiftClass = now > shiftEnd ? "past-shift" : (now >= shiftStart && now <= shiftEnd ? "current-shift" : "future-shift");
+                                                        <div class="shift-item @shiftClass">@shift</div>
+                                                    }
+                                                </div>
+                                            }
+                                        </td>
+
+                                        printedDays++;
+                                    }
+                                }
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="calendar-footer-bar">
+            <div class="legend-item">
+                <span class="legend-color" style="background-color: #BDBDBD;"></span> Ավարտված հերթափոխ
+            </div>
+            <div class="legend-item">
+                <span class="legend-color" style="background-color: #4CAF50;"></span> Ընթացիկ հերթափոխ
+            </div>
+            <div class="legend-item">
+                <span class="legend-color" style="background-color: #5C6BC0;"></span> Սպասվող հերթափոխ
+            </div>
+        </div>
+    </div>
+</div>

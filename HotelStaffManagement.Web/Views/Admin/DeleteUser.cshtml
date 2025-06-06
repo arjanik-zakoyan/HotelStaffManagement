@@ -1,0 +1,28 @@
+﻿@model HotelStaffManagement.Web.Models.Admin.DeleteUserViewModel
+
+@{
+    ViewData["Title"] = "Հեռացնել Օգտատիրոջը";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/admin.css" />
+}
+
+<div class="delete-manager container mt-4">
+    <h2>Հեռացնել Օգտատիրոջը</h2>
+    <br />
+    <div class="alert alert-danger">
+        <p>Վստա՞հ եք, որ ցանկանում եք Հեռացնել <strong>@Model.FullName</strong> Օգտատիրոջը :</p>
+    </div>
+
+    <form asp-action="DeleteConfirmed" method="post">
+        <input asp-for="UserID" type="hidden" name="UserID" value="@Model.UserID" />
+        <button type="submit" class="btn btn-danger">Այո, Հեռացնել</button>
+        <a asp-action="Index" class="btn btn-secondary">Չեղարկել</a>
+    </form>
+</div>
+
+
+@section Scripts {
+    <script src="~/js/admin.js"></script>
+}

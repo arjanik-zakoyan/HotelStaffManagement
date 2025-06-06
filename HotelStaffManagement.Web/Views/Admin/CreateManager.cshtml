@@ -1,0 +1,44 @@
+﻿@model HotelStaffManagement.Web.Models.Admin.CreateManagerViewModel
+
+@{
+    ViewData["Title"] = "Ավելացնել Մենեջեր";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/admin.css" />
+}
+
+<div class="create-manager-form">
+    <h2>Ավելացնել Մենեջեր</h2>
+
+    <form asp-action="CreateManager" method="post">
+        @Html.AntiForgeryToken()
+
+        <div class="form-group mb-3">
+            <label asp-for="FullName" class="form-label"></label>
+            <input asp-for="FullName" class="form-control" />
+            <span asp-validation-for="FullName" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="Username" class="form-label"></label>
+            <input asp-for="Username" class="form-control" />
+            <span asp-validation-for="Username" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mb-3">
+            <label asp-for="Password" class="form-label"></label>
+            <input asp-for="Password" type="password" class="form-control" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-success">Ստեղծել</button>
+            <a asp-action="Index" class="btn btn-secondary">Չեղարկել</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

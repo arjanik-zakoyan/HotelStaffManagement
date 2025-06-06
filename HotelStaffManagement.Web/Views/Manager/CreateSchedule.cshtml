@@ -1,0 +1,99 @@
+﻿@model HotelStaffManagement.Web.Models.Manager.CreateScheduleViewModel
+
+@{
+    ViewData["Title"] = "Ստեղծել Գրաֆիկ";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/manager.css" />
+}
+
+<div class="create-schedule-form">
+    <h2>Ստեղծել Գրաֆիկ</h2>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show text-center" role="alert">
+            @TempData["Success"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show text-center" role="alert">
+            @TempData["Error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <form asp-action="CreateSchedule" method="post" id="createScheduleForm">
+        <div class="mb-3">
+            <label asp-for="SelectedPosition" class="form-label"></label>
+            <select asp-for="SelectedPosition" class="form-control" asp-items="Model.Positions" id="positionSelect">
+                <option value="">Ընտրել հաստիք</option>
+            </select>
+            <span asp-validation-for="SelectedPosition" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="SelectedDate" class="form-label"></label>
+            <input asp-for="SelectedDate" type="text" class="form-control flatpickr-date" placeholder="Ընտրեք ամսաթիվ" value="@(Model.SelectedDate == default ? DateTime.Today.ToString("yyyy-MM-dd") : Model.SelectedDate.ToString("yyyy-MM-dd"))" />
+            <span asp-validation-for="SelectedDate" class="text-danger"></span>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Ընտրել հերթափոխ</label>
+            <div id="shiftsContainer">
+                @if (Model.Shifts.Any())
+                {
+                    <div class="custom-toggle-group">
+                        @for (int i = 0; i < Model.Shifts.Count; i++)
+                        {
+                            var shift = Model.Shifts[i];
+                            var id = $"shift-{i}";
+                            <div class="custom-toggle">
+                                <input type="radio" name="SelectedShift" id="@id" value="@shift.Value"
+                                       @(Model.SelectedShift == shift.Value ? "checked" : "") required />
+                                <label for="@id">@shift.Text</label>
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+            <span asp-validation-for="SelectedShift" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Ընտրել աշխատակիցներ</label>
+            <div id="employeesContainer">
+                @if (Model.Employees.Any())
+                {
+                    <div class="custom-toggle-group">
+                        @for (int i = 0; i < Model.Employees.Count; i++)
+                        {
+                            var emp = Model.Employees[i];
+                            var id = $"employee-{i}";
+                            <div class="custom-toggle">
+                                <input type="checkbox" name="SelectedEmployeeIds" id="@id" value="@emp.Value"
+                                       @(Model.SelectedEmployeeIds.Contains(int.Parse(emp.Value)) ? "checked" : "") />
+                                <label for="@id">@emp.Text</label>
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+            <span asp-validation-for="SelectedEmployeeIds" class="text-danger" id="employeeValidationMessage"></span>
+        </div>
+
+        <div class="d-flex justify-content-between mt-4">
+            <button type="submit" class="btn btn-schedule">Ստեղծել</button>
+            <a asp-action="AllSchedules" class="btn btn-secondary">Հետ</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <script src="~/js/manager.js"></script>
+    <partial name="_ValidationScriptsPartial" />
+}
+

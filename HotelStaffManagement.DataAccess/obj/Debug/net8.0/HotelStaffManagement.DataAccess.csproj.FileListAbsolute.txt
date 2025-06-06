@@ -1,0 +1,14 @@
+C:\Users\Arjan\OneDrive\Рабочий стол\Դիպլոմ\HotelStaffManagement\HotelStaffManagement.DataAccess\bin\Debug\net8.0\HotelStaffManagement.DataAccess.deps.json
+C:\Users\Arjan\OneDrive\Рабочий стол\Դիպլոմ\HotelStaffManagement\HotelStaffManagement.DataAccess\bin\Debug\net8.0\HotelStaffManagement.DataAccess.runtimeconfig.json
+C:\Users\Arjan\OneDrive\Рабочий стол\Դիպլոմ\HotelStaffManagement\HotelStaffManagement.DataAccess\bin\Debug\net8.0\HotelStaffManagement.DataAccess.dll
+C:\Users\Arjan\OneDrive\Рабочий стол\Դիպլոմ\HotelStaffManagement\HotelStaffManagement.DataAccess\bin\Debug\net8.0\HotelStaffManagement.DataAccess.pdb
+C:\Users\Arjan\OneDrive\Рабочий стол\Դիպլոմ\HotelStaffManagement\HotelStaffManagement.DataAccess\obj\Debug\net8.0\HotelStaffManagement.DataAccess.csproj.AssemblyReference.cache
+C:\Users\Arjan\OneDrive\Рабочий стол\Դիպլոմ\HotelStaffManagement\HotelStaffManagement.DataAccess\obj\Debug\net8.0\HotelStaffManagement.DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Arjan\OneDrive\Рабочий стол\Դիպլոմ\HotelStaffManagement\HotelStaffManagement.DataAccess\obj\Debug\net8.0\HotelStaffManagement.DataAccess.AssemblyInfoInputs.cache
+C:\Users\Arjan\OneDrive\Рабочий стол\Դիպլոմ\HotelStaffManagement\HotelStaffManagement.DataAccess\obj\Debug\net8.0\HotelStaffManagement.DataAccess.AssemblyInfo.cs
+C:\Users\Arjan\OneDrive\Рабочий стол\Դիպլոմ\HotelStaffManagement\HotelStaffManagement.DataAccess\obj\Debug\net8.0\HotelStaffManagement.DataAccess.csproj.CoreCompileInputs.cache
+C:\Users\Arjan\OneDrive\Рабочий стол\Դիպլոմ\HotelStaffManagement\HotelStaffManagement.DataAccess\obj\Debug\net8.0\HotelStaffManagement.DataAccess.dll
+C:\Users\Arjan\OneDrive\Рабочий стол\Դիպլոմ\HotelStaffManagement\HotelStaffManagement.DataAccess\obj\Debug\net8.0\refint\HotelStaffManagement.DataAccess.dll
+C:\Users\Arjan\OneDrive\Рабочий стол\Դիպլոմ\HotelStaffManagement\HotelStaffManagement.DataAccess\obj\Debug\net8.0\HotelStaffManagement.DataAccess.pdb
+C:\Users\Arjan\OneDrive\Рабочий стол\Դիպլոմ\HotelStaffManagement\HotelStaffManagement.DataAccess\obj\Debug\net8.0\HotelStaffManagement.DataAccess.genruntimeconfig.cache
+C:\Users\Arjan\OneDrive\Рабочий стол\Դիպլոմ\HotelStaffManagement\HotelStaffManagement.DataAccess\obj\Debug\net8.0\ref\HotelStaffManagement.DataAccess.dll

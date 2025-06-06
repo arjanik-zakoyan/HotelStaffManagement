@@ -1,0 +1,155 @@
+﻿@model HotelStaffManagement.Web.Models.Employee.ScheduleDisplayViewModel
+@using HotelStaffManagement.Web.Helpers
+@using HotelStaffManagement.DataAccess.Enums
+
+@{
+    ViewData["Title"] = "Աշխատանքային Գրաֆիկ";
+    var today = DateTime.Today;
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/manager.css" />
+}
+<div class="container-fluid all-schedules-page p-4">
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center mb-4 gap-3">
+        <h2 class="page-title">Աշխատանքային Գրաֆիկ</h2>
+    </div>
+
+    <div class=" d-flex flex-column flex-lg-row gap-4">
+        <!-- Sidebar -->
+        <div class="col-lg-2 mb-4">
+            <div class="sidebar bg-white p-3 rounded shadow-sm">
+                <h5 class="mb-3">Ֆիլտրել</h5>
+                <form method="get" class="d-flex flex-column gap-3">
+                    <!-- Date Picker Input -->
+                    <div class="mb-3">
+                        <label for="start" class="form-label">Սկիզբ</label>
+                        <input type="text" name="start" id="start"
+                               class="form-control flatpickr-date"
+                               placeholder="Ընտրեք ամսաթիվ"
+                               value="@Model.StartDate.ToString("yyyy-MM-dd")" />
+                    </div>
+                    <div class="mb-3">
+                        <label for="end" class="form-label">Վերջ</label>
+                        <input type="text" name="end" id="end"
+                               class="form-control flatpickr-date"
+                               placeholder="Ընտրեք ամսաթիվ"
+                               value="@Model.EndDate.ToString("yyyy-MM-dd")" />
+                    </div>
+                    @if (TempData["Error"] != null)
+                    {
+                        <div class="alert alert-danger text-center">
+                            @TempData["Error"]
+                        </div>
+                    }
+
+                    <div>
+                        <label for="position" class="form-label">Հաստիք</label>
+                        <select name="position" id="position" class="form-select">
+                            <option value="All" selected="@("All" == Model.SelectedPosition)">Բոլորը</option>
+                            @foreach (var pos in Model.AllPositions)
+                            {
+                                <option value="@pos" selected="@(pos == Model.SelectedPosition)">
+                                    @PositionHelper.GetPositionDisplayName(pos)
+                                </option>
+                            }
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary mt-2">Ֆիլտրել</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="col-lg-10">
+            @if (!Model.Dates.Any())
+            {
+                <div class="alert alert-info mt-4">Չկան տվյալներ։</div>
+            }
+            else
+            {
+                var positionsToDisplay = Model.SelectedPosition == "All"
+                ? Model.AllPositions
+                : new List<string> { Model.SelectedPosition };
+
+                foreach (var position in positionsToDisplay)
+                {
+                    var positionEnum = Enum.Parse<EmployeePosition>(position);
+                    var shiftsForPosition = ScheduleHelper.GetShiftsForPosition(positionEnum);
+
+                    var validDates = Model.Dates
+                    .Where(date =>
+                    shiftsForPosition.Any(shift =>
+                    Model.Schedule.TryGetValue((shift, date, position), out var emps) && emps.Any()
+                    )
+                    ).ToList();
+
+                    <h4 class="mb-3 text-indigo">
+                        @PositionHelper.GetPositionDisplayName(position)
+                    </h4>
+
+                    if (!validDates.Any())
+                    {
+                        <div class="alert alert-info mb-5">
+                            <strong>@PositionHelper.GetPositionDisplayName(position)</strong> հաստիքի համար գրանցումներ չեն գտնվել հետևյալ ժամանակահատվածում՝
+                            <strong>@Model.StartDate.ToString("dd.MM.yyyy") - @Model.EndDate.ToString("dd.MM.yyyy")</strong>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="table-responsive mb-5">
+                            <table class="table table-bordered schedule-table">
+                                <thead>
+                                    <tr>
+                                        <th class="normal-title">Հերթափոխ</th>
+                                        @foreach (var date in validDates)
+                                        {
+                                            var isToday = date.Date == today;
+                                            <th class="@(isToday ? "active-title" : "normal-title")">
+                                                @date.ToString("dd MMM ddd", new System.Globalization.CultureInfo("hy-AM"))
+                                            </th>
+                                        }
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var shift in shiftsForPosition)
+                                    {
+                                        <tr>
+                                            <td class="fw-semibold">@shift</td>
+                                            @foreach (var date in validDates)
+                                            {
+                                                var key = (shift, date, position);
+                                                Model.Schedule.TryGetValue(key, out var employees);
+                                                <td>
+                                                    @if (employees != null && employees.Any())
+                                                    {
+                                                        @foreach (var emp in employees)
+                                                        {
+                                                            var isCurrent = emp == (ViewBag.CurrentEmployeeName as string);
+                                                            var style = isCurrent ? "color:#FFC107 !important; font-weight:600;" : "";
+                                                            <div style="@style">@emp</div>
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="text-muted">-</div>
+                                                    }
+                                                </td>
+                                            }
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                }
+            }
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script src="~/js/manager.js"></script>
+    <partial name="_ValidationScriptsPartial" />
+}
